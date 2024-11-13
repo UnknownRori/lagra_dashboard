@@ -1,1 +1,8 @@
-<h1 class="text-red-500">Hello World</h1>
+<script>
+    import {Router} from "svelte-router-spa";
+    import {routes} from "./routes";
+
+    let options = {gaPageviews: true};
+</script>
+
+<Router {routes} {options} />

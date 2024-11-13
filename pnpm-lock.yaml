@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      svelte-router-spa:
+        specifier: ^7.0.1
+        version: 7.0.1(svelte@5.1.16)
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^4.0.0
@@ -801,6 +805,11 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
+  svelte-router-spa@7.0.1:
+    resolution: {integrity: sha512-Oh1bVBkK4UYSXzBSrVa8kTRrPtkc9+C7TSVlUkoFXyAf4dQtRrGXqPbXGU0lR5MJ8VkwXU68XclGtpCeWm5gpg==}
+    peerDependencies:
+      svelte: ^3.36.0
+
   svelte@5.1.16:
     resolution: {integrity: sha512-QcY+om9r8+uTcSfeFuv8++ExdfwVCKeT+Y7GPSZ6rQPczvy62BMtvMoi0rScabgv+upGE5jxKjd7M4u23+AjGA==}
     engines: {node: '>=18'}
@@ -837,6 +846,9 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
+
+  url-params-parser@1.0.4:
+    resolution: {integrity: sha512-0m6BqGpY2OetTZ3UPTLKkbTfUHigsX2YhrzORT9iYiyUJ/SP2WJ3cggg2YWtvMs36GPwK9Q44ffddyarniu2Tg==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -1543,6 +1555,11 @@ snapshots:
     transitivePeerDependencies:
       - picomatch
 
+  svelte-router-spa@7.0.1(svelte@5.1.16):
+    dependencies:
+      svelte: 5.1.16
+      url-params-parser: 1.0.4
+
   svelte@5.1.16:
     dependencies:
       '@ampproject/remapping': 2.3.0
@@ -1609,6 +1626,8 @@ snapshots:
       browserslist: 4.24.2
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  url-params-parser@1.0.4: {}
 
   util-deprecate@1.0.2: {}
 
