@@ -36,8 +36,8 @@
         });
         const resultMe = await responseMe.json();
         LoginCredentials.user.token = token;
-        LoginCredentials.user.username = resultMe.data.username;
-        LoginCredentials.user.role = resultMe.data.role;
+        LoginCredentials.user.username = resultMe.data.user.username;
+        LoginCredentials.user.role = resultMe.data.user.role;
         navigateTo("dashboard");
     }
 </script>
