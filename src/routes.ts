@@ -3,10 +3,10 @@ import Dashboard from "@/pages/Dashboard.svelte";
 import Transaction from "@/pages/Transaction.svelte";
 import LayoutDashboard from "@/template/Dashboard.svelte";
 import NotFound from "@/pages/not-found.svelte";
-import { LoginCredentials } from "./store/LoginCredentials.svelte";
+import { autoLogin, LoginCredentials } from "./store/LoginCredentials.svelte";
 
 function verifyLoggedIn() {
-  return LoginCredentials.user.token != null;
+  return LoginCredentials.user.token != '';
 }
 
 const routes = [

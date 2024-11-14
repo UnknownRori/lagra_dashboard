@@ -1,11 +1,17 @@
 <script lang="ts">
-    import {LoginCredentials} from "../store/LoginCredentials.svelte";
+    import {
+        authMe,
+        autoLogin,
+        LoginCredentials,
+    } from "../store/LoginCredentials.svelte";
     import {navigateTo} from "svelte-router-spa";
     import env from "../env";
 
     let username = "";
     let password = "";
     let errorMsg = $state("");
+
+    autoLogin();
 
     async function submitForm(event: Event) {
         event.preventDefault();
@@ -27,17 +33,17 @@
 
         const token = result.data.token;
 
-        const responseMe = await fetch(`${env.APP_URL}/api/v1/auth/me`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        const resultMe = await responseMe.json();
+        const resultMe = await authMe(token);
+
+        if (resultMe.status == "fail" || resultMe.data == null) {
+            errorMsg = "Token invalid";
+            return;
+        }
+
         LoginCredentials.user.token = token;
         LoginCredentials.user.username = resultMe.data.user.username;
         LoginCredentials.user.role = resultMe.data.user.role;
+        localStorage.setItem("user", JSON.stringify(LoginCredentials));
         navigateTo("dashboard");
     }
 </script>
