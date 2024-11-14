@@ -1,21 +1,30 @@
 <script lang="ts">
-    import {Route, routeIsActive} from "svelte-router-spa";
+    import {Route} from "svelte-router-spa";
     import {LoginCredentials} from "../store/LoginCredentials.svelte";
 
     import Navigation from "../components/Navigation.svelte";
 
-    export let currentRoute;
+    let {currentRoute} = $props();
     const params = {};
 
-    let expanded = true;
+    let expanded = $state(true);
+
+    let currentRouteState = $state(currentRoute);
+
+    function updatePage(route: string) {
+        currentRouteState = route;
+    }
+
+    function isActive(route: string) {
+        return currentRouteState == route;
+    }
 
     function expandSidebar() {
-        console.log(expanded);
         expanded = !expanded;
     }
 </script>
 
-<div class={expanded ? "relative flex flex-1 h-screen w-screen gap-4 rounded duration-1000 -translate-x-[15%]"
+<div class={!expanded ? "relative flex flex-1 h-screen w-screen gap-4 rounded duration-1000 -translate-x-[15%]"
     : "relative flex flex-1 h-screen w-screen gap-4 rounded duration-1000" }>
     <div class="flex flex-col md:w-[25%] h-full shadow bg-gray-100 border-r-2 border-gray-200 p-4">
         <div class="flex justify-between">
@@ -32,7 +41,7 @@
 
         <ul class="flex flex-col gap-4 mt-12">
             <li>
-                <a href="/dashboard" className={routeIsActive("dashboard")
+                <Navigation route="dashboard" onclick={updatePage} className={isActive("dashboard")
                     ? "bg-gray-200 text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4"
                     : "text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4" }>
                     <svg class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,14 +50,14 @@
                     </svg>
 
                     <span> Dashboard </span>
-                </a>
+                </Navigation>
             </li>
 
             <li>
-                <a class={routeIsActive("category")
+                <Navigation onclick={updatePage} className={isActive("category")
                     ? "bg-gray-200 text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4"
                     : "text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4" }
-                    href="/category">
+                    route="category">
                     <svg class="h-6 w-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
@@ -56,14 +65,14 @@
                     </svg>
 
                     <span> Category </span>
-                </a>
+                </Navigation>
             </li>
 
             <li>
-                <a class={routeIsActive("item")
+                <Navigation onclick={updatePage} className={isActive("item")
                     ? "bg-gray-200 text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4"
                     : "text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4" }
-                    href="/item">
+                    route="item">
                     <svg class="h-6 w-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1" />
@@ -72,14 +81,14 @@
                     </svg>
 
                     <span> Items </span>
-                </a>
+                </Navigation>
             </li>
 
             <li>
-                <a class={routeIsActive("transaction")
+                <Navigation onclick={updatePage} className={isActive("transaction")
                     ? "bg-gray-200 text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4"
                     : "text-xl flex items-center align-center gap-4 border-2 border-gray-200 rounded-xl py-2 px-4" }
-                    href="#">
+                    route="transaction">
                     <svg class="h-6 w-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="1" y="3" width="15" height="13" />
@@ -89,7 +98,7 @@
                     </svg>
 
                     <span> Transaction </span>
-                </a>
+                </Navigation>
             </li>
         </ul>
 
